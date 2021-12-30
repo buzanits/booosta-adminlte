@@ -1,6 +1,8 @@
 <?php
 namespace booosta\templateparser;
 
+HTML5Tags::load();
+
 class TemplatemoduleTags extends Tags
 {
   public function __construct()
