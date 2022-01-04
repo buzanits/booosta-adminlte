@@ -25,7 +25,7 @@
   <!-- Theme Styles -->
   <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css">
   <!-- Custom File Input -->
-  <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/dist/css/custom-file-input.css">
+  <!-- <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/dist/css/custom-file-input.css"> -->
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Custom Styles -->
