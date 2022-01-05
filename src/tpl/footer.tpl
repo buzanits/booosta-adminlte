@@ -25,7 +25,7 @@
 <script src="vendor/almasaeed2010/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.js"></script>
 <!-- <script src="vendor/almasaeed2010/adminlte/dist/js/jquery.mask.min.js"></script> -->
 <!-- EPB.js-->
-<script src="vendor/almasaeed2010/adminlte/dist/js/epb.js"></script>
+<!-- <script src="vendor/booosta/adminlte/src/epb.js"></script> -->
 <script src="vendor/booosta/webapp/src/tools.js"></script>
 <!-- #templateparser-postcode# -->
 {%_includes}
