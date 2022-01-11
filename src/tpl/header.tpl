@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Theme Styles -->
   <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{%base_dir}vendor/booosta/adminlte/src/adminlte.css">
   <!-- Custom File Input -->
   <!-- <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/dist/css/custom-file-input.css"> -->
   <!-- Google Font: Source Sans Pro -->

@@ -1,7 +1,7 @@
 <?php
 namespace booosta\templateparser;
 
-HTML5Tags::load();
+BootstrapTags::load();
 
 class TemplatemoduleTags extends Tags
 {
@@ -81,13 +81,13 @@ class TemplatemoduleTags extends Tags
 
     ];
 
-    $defaulttags = $this->makeInstance("\\booosta\\templateparser\\HTML5Tags");
+    $defaulttags = $this->makeInstance("\\booosta\\templateparser\\BootstrapTags");
     $this->merge($defaulttags);    
   }
 } 
 
 
-namespace booosta\templateparser\tags;
+namespace booosta\templateparser\tags\adminlte;
 
 class binfo extends \booosta\templateparser\Tag
 {
@@ -644,7 +644,7 @@ class bselect extends binput
 }
 
 
-class btimesel extends timesel
+class btimesel extends \booosta\templateparser\tags\timesel
 {
   protected $html = "<div class='form-group'>
                        <label for='%1' class='col-sm-%size control-label'>%title</label>
