@@ -13,6 +13,9 @@ trait webapp
   protected $select_prefix = '<div class="form-group"><label for="{name}" class="col-form-label">{caption}</label>';
   protected $select_postfix = '</div>';
 
+  protected $edit_pic_code = '<span class="text-default fas fa-edit" title="edit"></span>';
+  protected $delete_pic_code = '<span class="text-danger far fa-trash-alt" title="delete"></span>';
+
   protected function adminlte3_collapse_menu($collapse)
   {
     $this->TPL['collapse_menu'] = $collapse ? 'sidebar-collapse' : ''; 

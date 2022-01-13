@@ -173,6 +173,11 @@ class blink extends \booosta\templateparser\Tag
   function precode()
   {
     if($this->attributes['only-icon']) $this->attributes['2'] = $this->attributes['1'] && $this->attributes['1'] = "";
+
+    $dest = $this->attributes[2];
+    if(substr($dest, 0, 4) != 'http') $dest = str_replace('//', '/', $dest);
+    $this->attributes[2] = $dest;
+
     if($this->attributes['no-button']) $this->btncode = "%class";
     if($this->attributes['btn-app']): 
       $this->btncode = $this->btncodeapp;
