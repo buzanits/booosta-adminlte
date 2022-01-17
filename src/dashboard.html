@@ -106,11 +106,17 @@
             <br><small>{%USER_COMMENT}</small>
           </span>
           <div class="dropdown-divider"></div>
+%if('{%script_extension}' == '.php')
           <a href="{%base_dir}vendor/booosta/usersystem/exec/self.php" class="dropdown-item">
+%else
+          <a href="/self" class="dropdown-item">
             <i class="fas fa-id-card mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
+%if('{%script_extension}' == '.php')
           <a href="{%base_dir}vendor/booosta/usersystem/exec/logout.php" class="dropdown-item">
+%else
+          <a href="/logout" class="dropdown-item">
             <i class="fas fa-sign-out-alt mr-2"></i> Sign out
           </a>
         </div>

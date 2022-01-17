@@ -7,6 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
+  {%html_head}
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
