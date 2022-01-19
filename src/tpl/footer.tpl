@@ -1,5 +1,6 @@
 <!-- jQuery -->
 <script src="{%base_dir}vendor/almasaeed2010/adminlte/plugins/jquery/jquery.min.js"></script>
+<script src="{%base_dir}vendor/almasaeed2010/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{%base_dir}vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- DataTables -->

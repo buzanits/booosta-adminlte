@@ -32,6 +32,7 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- Custom Styles -->
   <link rel="stylesheet" href="{%base_dir}tpl/custom.css">
+  <link rel="stylesheet" href="{%base_dir}vendor/almasaeed2010/adminlte/plugins/jquery-ui/jquery-ui.min.css">
   <!-- Replace no-js with js if javascript workds -->
   <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|s)no-js(s|$)/,"$1js$2")})(document,window,0);</script>
 </head>
