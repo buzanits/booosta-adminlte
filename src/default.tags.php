@@ -11,6 +11,7 @@ class TemplatemoduleTags extends Tags
 
     $this->scripttags = [
     
+        'BFORMSTART'     => null,
         'BFORMSTARTG'    => "<form name='form0' method='get' class='form-horizontal' role='form' action='%1' %2 onSubmit='return checkForm();' %_>",
         'RTEXT'          => "<div class='form-group'>
                                 <label for='%1' class='col-sm-%size control-label'>%texttitle</label>
@@ -30,8 +31,8 @@ class TemplatemoduleTags extends Tags
         'BUTTONGROUP'    => '<div class="btn-group">',
         'BUTTONGROUPEND' => '</div>',
 
-        'BBUTTON'         => "<input type='button' name='%1' id='%1' value='%2' class='btn btn-%btn-color %class' %_>",
-        'BBUTTON1'        => "<button name='%1' id='%1' value='%2' class='btn btn-%btn-color %class' %_>%2</button>",
+        'BBUTTON'        => "<input type='button' name='%1' id='%1' value='%2' class='btn btn-%btn-color %class' %_>",
+        'BBUTTON1'       => "<button name='%1' id='%1' value='%2' class='btn btn-%btn-color %class' %_>%2</button>",
 
         'REDALERT'       => "<div class='alert alert-danger' role='alert'><center>%1</center></div>",
         'GREENALERT'     => "<div class='alert alert-success' role='alert'><center>%1</center></div>",
@@ -80,6 +81,7 @@ class TemplatemoduleTags extends Tags
         #'btn-icon'      => 'arrow',
 
     ];
+
 
     $defaulttags = $this->makeInstance("\\booosta\\templateparser\\BootstrapTags");
     $this->merge($defaulttags);    
@@ -386,7 +388,7 @@ abstract class binput extends \booosta\templateparser\Tag
     foreach($this->validator_rules as $key=>$rule) $rules .= $rule;
     foreach($this->validator_messages as $key=>$message) $messages .= $message;
 
-    $current_form = $this->get_data('current-form');
+    $current_form = $this->get_data('current-form') ?? 'form0';
     if($rules) $this->save_data_sub('form-rules', $current_form, "$name: { $rules },\n");
     if($messages) $this->save_data_sub('form-messages', $current_form, "$name: { $messages },\n");
 
@@ -474,10 +476,9 @@ class bformgrpstart extends binput
 
 class bdate extends binput
 {
-  protected $inputcodesingle = "<input type='text' name='%1' value='%2' class='epb-datepicker form-control %class' id='%1' autocomplete='off' %_>";
-  protected $inputcoderange = "<input type='text' name='%1' value='%2' class='epb-rangedatepicker form-control %class' id='%1' autocomplete='off' %_>";
-  protected $inputcoderangewithranges = "<input type='text' name='%1' value='%2' class='epb-rangedatepicker-with-ranges form-control %class' id='%1' autocomplete='off' %_>";
-  #protected $inputcodefullcontrol = "<input type='text' name='%1' value='%2' class='form-control %class' id='%1' %_>";
+  protected $inputcodesingle = "<input type='text' name='%1' value='%2' class='booosta-datepicker form-control %class' id='%1' autocomplete='off' %_>";
+  protected $inputcoderange = "<input type='text' name='%1' value='%2' class='booosta-rangedatepicker form-control %class' id='%1' autocomplete='off' %_>";
+  protected $inputcoderangewithranges = "<input type='text' name='%1' value='%2' class='booosta-rangedatepicker-with-ranges form-control %class' id='%1' autocomplete='off' %_>";
   protected $fixattr = ['showdropdowns','showweeknumbers','rangedatepicker','rangedatepickerwithranges'];
 
   protected function precode()
@@ -490,7 +491,6 @@ class bdate extends binput
 
     if($this->attributes['rangedatepicker']) $this->inputcode = $this->inputcoderange;
     elseif($this->attributes['rangedatepickerwithranges']) $this->inputcode = $this->inputcoderangewithranges;
-    #elseif($this->attributes['rangedatepickerfullcontrol']) $this->inputcode = $this->inputcodefullcontrol;
     else $this->inputcode = $this->inputcodesingle;
 
     parent::precode();
@@ -499,18 +499,6 @@ class bdate extends binput
     // Fullcontrol datepicker wird mit #ID initialisiert... dh nicht 100mal auf der Seite verwenden!
     $js = "";
     $id = $this->attributes['1'];
-    // if($this->attributes['rangedatepickerfullcontrol']):
-
-    //   $js .= "var options = \$.extend( {}, datepicker_defaults ";
-    //   if ($this->attributes['rangedatepicker']) $js .= ", datepicker_range";
-    //   elseif ($this->attributes['rangedatepickerwithranges']) $js .= ", datepicker_ranges";
-    //   $js .= ");";
-    //   $js .= "\$('#$id').daterangepicker(options);";
-      
-    //   $js .= "\$('#$id').on('apply.daterangepicker', function(ev, picker) { \$(this).val(picker.startDate.format('DD.MM.YYYY') + ' - ' + picker.endDate.format('DD.MM.YYYY')); });";
-    //   $js .= "\$('#$id').on('cancel.daterangepicker', function(ev, picker) { \$(this).val(''); });";
-
-    // endif;
     if($this->attributes['showdropdowns']) $js .= "\$('#$id').data('daterangepicker').showDropdowns = true;\n";
     if($this->attributes['showweeknumbers']) $js .= "\$('#$id').data('daterangepicker').showISOWeekNumbers = true;\n";
     if($js != "") $this->add_extra_js($js);
@@ -615,8 +603,8 @@ class bselect extends binput
 {
   protected $fixattr = ['type'];
   protected $inputcode = "<select name='%1' size='%3' class='form-control %class' %_>%options</select>";
-  protected $inputcodesearch = "<select name='%1' size='%3' data-placeholder='Select a State' class='form-control epb-select2 %class' %_>%options</select>";
-  protected $inputcodemultiple = "<select name='%1' size='%3' data-placeholder='%multiple-placeholder' multiple=multiple class='form-control epb-select2 %class' %_>%options</select>";
+  protected $inputcodesearch = "<select name='%1' size='%3' data-placeholder='Select a State' class='form-control booosta-select2 %class' %_>%options</select>";
+  protected $inputcodemultiple = "<select name='%1' size='%3' data-placeholder='%multiple-placeholder' multiple=multiple class='form-control booosta-select2 %class' %_>%options</select>";
 
   protected function precode()
   {
@@ -654,8 +642,8 @@ class btimesel extends \booosta\templateparser\tags\timesel
   protected $html = "<div class='form-group'>
                        <label for='%1' class='col-sm-%size control-label'>%title</label>
                        <div class='col-sm-4'>
-                         <select name='%1_hour' class='form-control epbtimesel %class' id='%1_hour'  %_>%hoptions</select> :
-                         <select name='%1_minute' class='form-control epbtimesel %class' id='%1_minute' %_>%moptions</select>
+                         <select name='%1_hour' class='form-control booostatimesel %class' id='%1_hour'  %_>%hoptions</select> :
+                         <select name='%1_minute' class='form-control booostatimesel %class' id='%1_minute' %_>%moptions</select>
                        </div>
                      </div>";
 }
@@ -803,6 +791,7 @@ class bformstart extends \booosta\templateparser\Tag
 
     $this->save_data('current-form', $this->extraattributes['id'], false);  // false = append
 
+    #\booosta\Framework::debug('vor add_postfunction');
     $this->add_postfunction(
       function() {
         $formid = $this->extraattributes['id'];
