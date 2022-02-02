@@ -9,19 +9,21 @@ b::$module_config['adminlte']['menu_default_icon'] = '<i class="nav-icon far fa-
 
 trait webapp
 {
-  protected $select_class = 'form-control default';
-  protected $select_prefix = '<div class="form-group"><label for="{name}" class="col-form-label">{caption}</label>';
-  protected $select_postfix = '</div>';
-
   protected function adminlte3_collapse_menu($collapse)
   {
     $this->TPL['collapse_menu'] = $collapse ? 'sidebar-collapse' : ''; 
   }
   
-  protected function init_adminlte()
+  protected function webappinit_adminlte()
   {
-    $this->edit_pic_code = '<span class="text-default fas fa-edit" title="edit"></span>';
-    $this->delete_pic_code = '<span class="text-danger far fa-trash-alt" title="delete"></span>';
+    if($this->config('template_module') == 'adminlte'):
+      $this->select_class = 'form-control default';
+      $this->select_prefix = '<div class="form-group"><label for="{name}" class="col-form-label">{caption}</label>';
+      $this->select_postfix = '</div>';
+
+      $this->edit_pic_code = '<span class="text-default fas fa-edit" title="edit"></span>';
+      $this->delete_pic_code = '<span class="text-danger far fa-trash-alt" title="delete"></span>';
+    endif;
   }
 }
 
