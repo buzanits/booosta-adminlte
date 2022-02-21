@@ -446,7 +446,7 @@ class bpassword extends binput
 
   protected function precode () {
     parent::precode();
-    $this->extraattributes['texttitle'] = $this->attributes[2];
+    if($this->extraattributes['texttitle'] == '') $this->extraattributes['texttitle'] = $this->attributes[2];
   }
 }
 
