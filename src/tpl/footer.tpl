@@ -28,7 +28,7 @@
 <!-- booosta.js-->
 <script src="{%base_dir}vendor/booosta/adminlte/src/booosta.js"></script>
 <script src="{%base_dir}vendor/booosta/webapp/src/tools.js"></script>
-<!-- #templateparser-postcode# -->
 {%_includes}
+<!-- #templateparser-postcode# -->
 </body>
 </html>

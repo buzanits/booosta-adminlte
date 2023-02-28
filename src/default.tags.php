@@ -404,7 +404,11 @@ class btext extends binput
 
   protected function precode()
   {
+    #\booosta\Framework::debug(self::$sharedInfo['templateparser']['config']);
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
+
     parent::precode();
+
     if($this->attributes['readonly'] == true):
       $this->html = str_replace("%readonly", "form-control-plaintext", $this->html);
     else:
@@ -435,6 +439,7 @@ class bemail extends binput
   {
     $this->attributes['val-email'] = true;
     $this->attributes['prepend-icon'] = "fas fa-envelope";
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
     parent::precode();
   }
 }
@@ -445,6 +450,7 @@ class bpassword extends binput
   protected $inputcode = "<input type='password' name='%1' class='form-control %class' id='%1' aria-describedby='%1_helpblock' %_>";
 
   protected function precode () {
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
     parent::precode();
     if($this->extraattributes['texttitle'] == '') $this->extraattributes['texttitle'] = $this->attributes[2];
   }
@@ -468,9 +474,14 @@ class bformsubmit extends \booosta\templateparser\Tag
 
 class bformgrpstart extends binput
 {
+  protected $htmlhorizontal = "<div class='form-group row'> <label class='col-sm-%form-horizontal-size col-form-label'>%1</label> <div class='col-sm-%asize'>";
   protected $html = "<div class='form-group'> <label class='col-sm-%size control-label'>%1</label> <div class='col-sm-%asize'>";
 
-  protected function precode() {}  // do not inherit precode from binput
+  protected function precode()
+  {
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->html = $this->htmlhorizontal;
+    // intentionally no parent::precode()
+  }
 }
 
 
@@ -492,6 +503,8 @@ class bdate extends binput
     if($this->attributes['rangedatepicker']) $this->inputcode = $this->inputcoderange;
     elseif($this->attributes['rangedatepickerwithranges']) $this->inputcode = $this->inputcoderangewithranges;
     else $this->inputcode = $this->inputcodesingle;
+
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
 
     parent::precode();
     $this->default_save_data();
@@ -542,7 +555,11 @@ class bcheckbox extends binput
       $this->htmlhorizontal = $this->htmlhorizontal_checkbox;
       $this->htmldefault = $this->htmldefault_checkbox;
     endif;
+
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
+
     parent::precode();
+
     if($this->attributes[2]) $this->attributes[2] = 'checked'; else $this->attributes[2] = '';
     if($this->extraattributes['texttitle'] == '') $this->extraattributes['texttitle'] = $this->attributes[1];
     $this->err_required = $this->extraattributes['err-required'] ?? 'Please check this box';
@@ -556,7 +573,17 @@ class bstatic extends binput
 {
   protected $inputcode = "<span class='form-control-plaintext %class' id='%2'>%1</span>";
 
-  protected function precode() {
+  protected $htmlhorizontal = "<div class='form-group row'>
+                                <label for='%2' class='col-sm-%form-horizontal-size col-form-label'>%texttitle</label>
+                                <div class='col-sm-%asize'>
+                                  %inputcode
+                                  %varhelp
+                                </div>
+                             </div>";
+
+  protected function precode() 
+  {
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
     parent::precode();
     $this->extraattributes['texttitle'] = $this->attributes[2];
   }  
@@ -570,7 +597,10 @@ class btextarea extends binput
 
   protected function precode()
   {
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
+
     parent::precode();
+
     if($this->attributes[2] == '') $this->attributes[2] = '5';
     $this->attributes['texttitle'] = $this->attributes[3];
   }
@@ -610,6 +640,9 @@ class bselect extends binput
   {
     if($this->attributes['type'] == "search") $this->inputcode = $this->inputcodesearch;
     if($this->attributes['type'] == "multiple") $this->inputcode = $this->inputcodemultiple;
+
+    if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
+
     parent::precode();
     
     $lines = explode("\n", $this->code);
@@ -619,6 +652,7 @@ class bselect extends binput
     foreach($lines as $line):
       $key = preg_replace("/.*\[([^\]]*)\].*/", "$1", $line);
       $val = preg_replace("/.*\](.*)/", "$1", $line);
+      #\booosta\Framework::debug("key: $key, val: $val");
 
       if($key == '') $key = $val;
       if($key == $this->attributes[2]) $sel = "selected"; else $sel = "";

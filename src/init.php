@@ -17,12 +17,13 @@ trait webapp
   protected function webappinit_adminlte()
   {
     if($this->config('template_module') == 'adminlte'):
-      $this->select_class = 'form-control default';
+      #$this->select_class = 'form-control default';
       $this->select_prefix = '<div class="form-group"><label for="{name}" class="col-form-label">{caption}</label>';
       $this->select_postfix = '</div>';
 
       $this->edit_pic_code = '<span class="text-default fas fa-edit" title="edit"></span>';
       $this->delete_pic_code = '<span class="text-danger far fa-trash-alt" title="delete"></span>';
+      $this->subtables_pic_code = '<span class="text-default fa fa-list" title="subtables"></span>';
     endif;
   }
 }
