@@ -1,6 +1,8 @@
 <?php
 namespace booosta\templateparser;
 
+use \booosta\Framework as b;
+
 BootstrapTags::load();
 
 class TemplatemoduleTags extends Tags
@@ -90,6 +92,7 @@ class TemplatemoduleTags extends Tags
 
 
 namespace booosta\templateparser\tags\adminlte;
+use \booosta\Framework as b;
 
 class binfo extends \booosta\templateparser\Tag
 {
@@ -557,6 +560,7 @@ class bcheckbox extends binput
     endif;
 
     if(self::$sharedInfo['templateparser']['config']['form-horizontal']) $this->extraattributes['form-horizontal'] = 'true';
+    #\booosta\Framework::debug($this->attributes);
 
     parent::precode();
 
@@ -692,7 +696,7 @@ class btimesela extends btimesel
 
 class bboxcenter extends \booosta\templateparser\Tag
 {
-  protected $fixattr = ['boxsize'];
+  protected $fixattr = ['boxsize', 'bboxsize'];
   protected $html = '<div class="row">
                        <div class="col-sm-%sizsm offset-sm-%asizsm col-md-%sizmd offset-md-%asizmd col-lg-%sizlg offset-lg-%asizlg col-xl-%sizxl offset-xl-%asizxl">';
 
