@@ -164,7 +164,7 @@
     <a href="{%base_dir}{%home_link_}" class="brand-link text-center navbar-success">
       <span class="page-title-short"><b>{%page_title_short}</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="page-title brand-title">{%page_title}</span>
+      <span class="page-title brand-title">{%site_name}</span>
       <!-- <span class="brand-text font-weight-light">AdminLTE 3</span> -->
     </a>
 
@@ -224,6 +224,7 @@
   <!-- /.content-wrapper -->
 
   <footer class="main-footer">
+    {%footer_content} &nbsp;
     <div class="float-right d-none d-sm-block">
       <b>Version</b> {%page_version}
     </div>
@@ -233,7 +234,7 @@
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
-    Sidebar Content
+    {%sidebar_content}
   </aside>
   <!-- /.control-sidebar -->
 </div>
